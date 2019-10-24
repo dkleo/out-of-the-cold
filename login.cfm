@@ -7,7 +7,11 @@
 		<!-- Card Header Dropdown -->
 	</div>
 	<div class="card-body">
+<<<<<<< Updated upstream
 		<form action="authenticate.cfm" method="post">
+=======
+		<form action="login.cfm" method="post">
+>>>>>>> Stashed changes
 			<input type="hidden" name="redirectURL" value="#(structKeyExists(url, 'redirectURL')) ? url.redirectURL : '/admin/cars.cfm'#" />
 			<div class="row mb-2">
 				<div class="col-md-2">Username</div>

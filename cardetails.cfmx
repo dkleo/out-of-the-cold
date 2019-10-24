@@ -1,21 +1,25 @@
 <cfparam name="url.carID" default="12"/>
 
-<cfset qryCar = request.services.carService.getCar(carID = url.carID) />
-
-<!--- <cfquery datasource="cartracker">
-insert Image (active,carID,createdDate,path)
-	values (1, 29, '2019-10-24', 'https://i.ytimg.com/vi/vmlVlSNZ8d8/maxresdefault.jpg')
-</cfquery> --->
+<cfquery name="qryCar" datasource="cartracker">
+	SELECT
+		c.*,
+		ma.longName as make,
+		mo.longName as model,
+		co.longName as color
+	FROM Car c
+	JOIN Make ma ON c.makeID = ma.makeID
+	JOIN Model mo ON c.modelID = mo.modelID
+	JOIN Color co ON c.colorID = co.colorID
+	WHERE carID = #URL.carID#
+</cfquery>
 
 <!--- // images --->
-<!--- <cfquery name="getImages" datasource="cartracker">
-	SELECT 			*
+<cfquery name="getImages" datasource="cartracker">
+	SELECT *
 	FROM Image
-	WHERE carID = <cfqueryparam value="#URL.carID#" cfsqltype="cf_sql_integer" />
-</cfquery> --->
-<cfset getImages = request.services.carService.getImages(carID = url.carID) />
-<!--- <cfdump var="#getImages#" />
-<cfabort /> --->
+	WHERE carID = #URL.carID#
+</cfquery>
+
 <cfinclude template="/includes/cfml/header.cfm"/>
 
 <!-- Area Chart -->

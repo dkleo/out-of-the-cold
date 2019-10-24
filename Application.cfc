@@ -16,20 +16,38 @@ component {
 
 	// application start
 	public boolean function onApplicationStart(){
+		// add services into application scope for easy reuse
+		application.dsn = 'cartracker';
+		this.wirebox = new wirebox.system.ioc.Injector('config.Wirebox');
 		return true;
 	}
 
 	// request start
-	public boolean function onRequestStart( String targetPage ){
-		return true;
+public boolean function onRequestStart( String targetPage ){
+		if( structKeyExists(url, "init") and url.init){
+			onApplicationStart();
+		}
+
+	// put wirebox into request scope so our scripts can utilize it easily
+	request.wirebox = application.wirebox;
+	// check the user
+	request.wirebox.getInstance('Security').checkAuthentication();
+	return true;
+
 	}
+
 
 	public void function onApplicationEnd( struct appScope ){
 	}
 
-	public void function onSessionStart(){
-		param name="session.authenticated" default="false";
+public void function onSessionStart(){
+      param name="session.authenticated" default="false";
+
+	if( !structKeyExists(session, 'csrfToken') ){
+			session.csrfToken = createUUID(); // create a unique token for this user
 	}
+}
+
 
 	public void function onSessionEnd( struct sessionScope, struct appScope ){
 	}

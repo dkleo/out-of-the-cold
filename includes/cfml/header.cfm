@@ -40,8 +40,11 @@
 						<span>Manager</span>
 					</a>
 				</li>
-
-
+				<li class="nav-item">
+					<a class="nav-link" href="/test.cfm">
+						<span>Playground</span>
+					</a>
+				</li>
 				<!-- Divider -->
 				<hr class="sidebar-divider d-none d-md-block">
 			</ul>
@@ -67,6 +70,6 @@
 				<div class="container-fluid container-fixed" id="containerView">
 					<div id="top-container"></div>
 					<cfif len(url.alert)>
-						<div class="alert alert-#url.alertType#">#url.alert#</div>
+						<div class="alert alert-#encodeForHTML(url.alertType)#">#encodeForHTML(url.alert)#</div>
 					</cfif>
 </cfoutput>

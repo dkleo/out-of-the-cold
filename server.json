@@ -13,12 +13,13 @@
             "enable":false,
             "port":"8443"
         },
-        "directoryBrowsing":true
+        "directoryBrowsing":false
     },
     "jvm":{
         "heapSize":"768"
     },
     "openBrowser":true,
     "debug":true,
-    "debugh":true
+    "debugh":true,
+    "name":"out-of-the-cold"
 }

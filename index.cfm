@@ -1,15 +1,4 @@
-<cfquery name="qryCars" datasource="cartracker">
-	SELECT
-		c.*,
-		ma.longName as make,
-		mo.longName as model,
-		co.longName as color
-	FROM Car c
-	INNER JOIN Make ma ON c.makeID = ma.makeID
-	INNER JOIN Model mo ON c.modelID = mo.modelID
-	INNER JOIN Color co ON c.colorID = co.colorID
-	ORDER BY c.saleprice;
-</cfquery>
+<cfset qryCars = request.wirebox.getInstance("CarService").getAllCars() />
 
 <cfoutput>
 <cfinclude template="/includes/cfml/header.cfm"/>
@@ -30,11 +19,12 @@
 		</div>
 		<cfloop query="#qryCars#">
 			<div class="row mb-2">
-				<div class="col-md-2"><a href="/cardetails.cfm?carID=#qryCars.carID#">#qryCars.make# #qryCars.model#</a></div>
-				<div class="col-md-2">#qryCars.year#</div>
-				<div class="col-md-2">#qryCars.color#</div>
-				<div class="col-md-2 text-right">$#qryCars.listPrice#</div>
-				<div class="col-md-2 text-success text-right"><strong>$#qryCars.salePrice#</strong></div>
+
+				<div class="col-md-2"><a href="/cardetails.cfm?carID=#qryCars.carID#">#encodeForHtml(qryCars.make)# #encodeForHtml(qryCars.model)#</a></div>
+				<div class="col-md-2">#encodeForHtml(qryCars.year)#</div>
+				<div class="col-md-2">#encodeForHtml(qryCars.color)#</div>
+				<div class="col-md-2 text-right">$#encodeForHtml(qryCars.listPrice)#</div>
+				<div class="col-md-2 text-success text-right"><strong>$#encodeForHtml(qryCars.salePrice)#</strong></div>
 				<div class="col-md-2 text-right"><a href="/cardetails.cfm?carID=#qryCars.carID#" class="btn btn-primary btn-sm">View</a></div>
 			</div>
 		</cfloop>

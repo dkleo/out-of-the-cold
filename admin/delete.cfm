@@ -1,4 +1,8 @@
+<<<<<<< Updated upstream
 <cfinclude template="/authenticate.cfm"/>
+=======
+<!--- <cfinclude template="/authenticate.cfm"/> --->
+>>>>>>> Stashed changes
 
 <cfscript>
 	transaction {
@@ -16,4 +20,8 @@
 	}
 </cfscript>
 
+<<<<<<< Updated upstream
 <cflocation url="/admin/cars.cfm?alert=Car deleted successfully&alertType=success"/>
+=======
+<cflocation url="/admin/cars.cfm?alert=Car deleted successfully&alertType=success" addtoken="false" />
+>>>>>>> Stashed changes
