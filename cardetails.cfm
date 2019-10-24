@@ -1,21 +1,10 @@
 <cfparam name="url.carID" default="12"/>
 
-<cfset qryCar = request.services.carService.getCar(carID = url.carID) />
+<cfset qryCar = request.wirebox.getInstance("CarService").getCar(carID = url.carID) />
 
-<!--- <cfquery datasource="cartracker">
-insert Image (active,carID,createdDate,path)
-	values (1, 29, '2019-10-24', 'https://i.ytimg.com/vi/vmlVlSNZ8d8/maxresdefault.jpg')
-</cfquery> --->
 
-<!--- // images --->
-<!--- <cfquery name="getImages" datasource="cartracker">
-	SELECT 			*
-	FROM Image
-	WHERE carID = <cfqueryparam value="#URL.carID#" cfsqltype="cf_sql_integer" />
-</cfquery> --->
-<cfset getImages = request.services.carService.getImages(carID = url.carID) />
-<!--- <cfdump var="#getImages#" />
-<cfabort /> --->
+<cfset getImages = request.wirebox.getInstance("CarService").getImages(carID = url.carID) />
+
 <cfinclude template="/includes/cfml/header.cfm"/>
 
 <!-- Area Chart -->

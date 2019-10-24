@@ -1,5 +1,5 @@
 
-<cfset qryCars = request.services.carService.getAllCars() />
+<cfset qryCars = request.wirebox.getInstance("CarService").getAllCars() />
 
 <cfinclude template="/includes/cfml/header.cfm"/>
 <cfoutput>
@@ -22,11 +22,11 @@
 		</div>
 		<cfloop query="#qryCars#">
 			<div class="row mb-2">
-				<div class="col-md-2"><a href="edit.cfm?carID=#qryCars.carID#">#qryCars.make# #qryCars.model#</a></div>
-				<div class="col-md-2">#qryCars.year#</div>
-				<div class="col-md-2">#qryCars.color#</div>
-				<div class="col-md-2 text-right">$#qryCars.listPrice#</div>
-				<div class="col-md-2 text-success text-right"><strong>$#qryCars.salePrice#</strong></div>
+				<div class="col-md-2"><a href="edit.cfm?carID=#qryCars.carID#">#encodeForHtml(qryCars.make)# #encodeForHtml(qryCars.model)#</a></div>
+				<div class="col-md-2">#encodeForHtml(qryCars.year)#</div>
+				<div class="col-md-2">#encodeForHtml(qryCars.color)#</div>
+				<div class="col-md-2 text-right">$#encodeForHtml(qryCars.listPrice)#</div>
+				<div class="col-md-2 text-success text-right"><strong>$#encodeForHtml(qryCars.salePrice)#</strong></div>
 				<div class="col-md-2 text-right">
 					<a href="edit.cfm?carID=#qryCars.carID#" class="btn btn-primary btn-sm">Edit</a>
 					<a href="delete.cfm?carID=#qryCars.carID#" class="btn btn-danger btn-sm">Delete</a>
